@@ -2,7 +2,7 @@ import random
 from dino_runner.components.obstacles.obstacle import Obstacle
 from dino_runner.utils.constants import BIRD
 class Bird(Obstacle):
-    #Y_POS_BIRD = [100, 150, 200, 250, 300]
+    #Y_POS_BIRD = [100, 150, 200, 250, 300] 
 
     def __init__(self):
         self.step_index = 0 
