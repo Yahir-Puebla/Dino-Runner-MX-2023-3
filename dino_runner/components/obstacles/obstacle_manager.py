@@ -1,4 +1,5 @@
 import random
+import pygame
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 class ObstacleManager:
@@ -18,6 +19,10 @@ class ObstacleManager:
             if obstacle.rect.x < -obstacle.rect.width:
                 self.obstacles.remove(obstacle)
             obstacle.update(game_speed, player)
+        
+    def reset_obstacles(self):
+        self.obstacles = []
+
 
     def draw(self, screen):
         for obstacle in self.obstacles:

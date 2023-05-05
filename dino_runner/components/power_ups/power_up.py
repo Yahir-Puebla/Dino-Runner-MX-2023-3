@@ -19,6 +19,7 @@ class PowerUp:
 
     def update(self, game_speed, player):
         self.rect.x -= game_speed
+        
         if self.rect.colliderect(player.dino_rect):
             self.start_time = pygame.time.get_ticks()
             self.time_up = self.start_time + self.POWER_UP_DURATION
