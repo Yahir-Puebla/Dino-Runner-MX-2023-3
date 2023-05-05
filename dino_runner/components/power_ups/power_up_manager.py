@@ -7,13 +7,17 @@ class PowerUpManager:
         self.power_ups = []
     
     def update(self, game_speed, points, player):
-        if len(self.power_ups) == 0 and points % 200 == 0:
+        if len(self.power_ups) == 0: #0 and points % 200 == 0
             type_power_ups = random.randint(1, 2)
+            
             match type_power_ups:
                     case 1:
                         self.power_ups.append(Shield())
+                        print("Power up")
                     case 2:
                         self.power_ups.append(Hammer())
+                        print("Power up")
+
 
         for power_up in self.power_ups:
             if power_up.used or power_up.rect.x < -power_up.rect.width:

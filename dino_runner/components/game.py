@@ -7,6 +7,8 @@ from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 
 
 class Game:
+    hig_scores = []
+
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(TITLE)
@@ -23,22 +25,26 @@ class Game:
         self.points = 0
         self.runnig = True
         self.death_count = 0
-
+        self.letras_validas = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        self.gamertag = []
+        
     def execute(self):
         while self.runnig:
             if not self.playing:
                 self.show_menu()
-
+                #self.menu_name_player()
 
     def show_menu(self):
         self.runnig = True
         while_color = (255, 255, 255)
         self.screen.fill(while_color)
         self.print_menu_elemt()
+        
 
         pygame.display.update()
 
         self.handle_key_events_on_menu()
+        
 
     def handle_key_events_on_menu(self):
         for event in pygame.event.get():
@@ -50,6 +56,7 @@ class Game:
                 exit()
             if event.type == pygame.KEYDOWN:
                 self.run()
+                
 
     def print_menu_elemt(self):
         if self.death_count == 0:
@@ -61,6 +68,23 @@ class Game:
             text, text_rect = text_utils.get_center_message(
                 'press any Key to Restart')
             self.screen.blit(text, text_rect)
+           
+            
+
+
+    def menu_name_player(self):
+        while True:
+            entrada = input("What is your Gamerttag?: ")
+            if len(entrada) == 3:
+                entrada = entrada.lower()
+                self.hig_scores.append({"nombre": entrada, "puntos": self.points})
+                self.execute()
+                print(self.hig_scores)
+                break
+            else:
+                print("La entrada no es válida. Solo se admiten las letras a, b y c, y no se admiten números.")
+            
+
     
     def reset(self):
         self.player = False
@@ -71,6 +95,7 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_Power()
+      
 
     def run(self):
         # Game loop: events - update - draw
@@ -91,7 +116,7 @@ class Game:
         self.points += 1
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
-        self.obstacle_manager.update(self.game_speed, self.player)
+        self.obstacle_manager.update(self.game_speed, self.player, self.points)
         self.power_up_manager.update(self.game_speed, self.points, self.player)
         if self.player.dino_dead:
             self.playing = False
@@ -125,4 +150,5 @@ class Game:
 
         text, text_rect = text_utils.get_score_element(self.points)
         self.screen.blit(text, text_rect)
-
+        
+    

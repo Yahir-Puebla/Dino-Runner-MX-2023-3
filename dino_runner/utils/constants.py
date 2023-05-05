@@ -69,6 +69,8 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
+MEN = pygame.image.load(os.path.join(IMG_DIR,'primitive-persons-6726059-removebg-preview.png'))
+
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hamemr"
